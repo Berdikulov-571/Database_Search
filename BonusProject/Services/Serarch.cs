@@ -32,7 +32,7 @@ namespace BonusProject.Services
 
                             if (result.Count != 0)
                             {
-                                resultStr.AddRange(result);
+                                resultStr.Add($"{i} tablening {s} columnida {shart} mavjud");
                             }
                         }
                         catch (Exception ex)
