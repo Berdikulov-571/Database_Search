@@ -42,6 +42,18 @@ namespace BonusProject.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetWithTwoParametr(int first,int two)
+        {
+            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=StudyCenterDB;Integrated Security=True;";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                User? user = connection.QueryFirstOrDefault<User>($"exec GetUsersWithYear {first},{two}", commandType: CommandType.StoredProcedure);
+
+                return Ok(user);
+            }
+        }
 
     }
 }
