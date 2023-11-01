@@ -49,7 +49,7 @@ namespace BonusProject.Controllers
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                User? user = connection.QueryFirstOrDefault<User>($"exec GetUsersWithYear {first},{two}", commandType: CommandType.StoredProcedure);
+                IEnumerable<User> user = connection.Query<User>($"exec GetUsersWithYear {first},{two}");
 
                 return Ok(user);
             }
