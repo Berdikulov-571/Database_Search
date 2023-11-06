@@ -25,35 +25,5 @@ namespace BonusProject.Controllers
             var res = Serarch.FromAllDatabase(shart);
             return Ok(res);
         }
-
-        [HttpGet]
-        public IActionResult GetUserById(int Id)
-        {
-            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=StudyCenterDB;Integrated Security=True;";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                DynamicParameters parametres = new DynamicParameters();
-                parametres.Add("userId", Id);
-
-                User? user = connection.QueryFirstOrDefault<User>("GetUserById", parametres, commandType: CommandType.StoredProcedure);
-
-                return Ok(user);
-            }
-        }
-
-        [HttpGet]
-        public IActionResult GetWithTwoParametr(int first,int two)
-        {
-            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=StudyCenterDB;Integrated Security=True;";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                IEnumerable<User> user = connection.Query<User>($"exec GetUsersWithYear {first},{two}");
-
-                return Ok(user);
-            }
-        }
-
     }
 }
